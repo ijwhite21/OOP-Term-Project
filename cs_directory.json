@@ -1,0 +1,272 @@
+[
+  {
+    "FirstName": "Amani",
+    "LastName": "Altarawneh",
+    "EmailAddress": "aaltarawneh@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Assistant Professor",
+    "Phone": "--",
+    "Building": "Bruner Hall (BRUN) 232",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Mark",
+    "LastName": "Boshart",
+    "EmailAddress": "MBoshart@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Adjunct Faculty",
+    "Phone": "931-372-3428",
+    "Building": "Bruner Hall (BRUN) 232",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Travis",
+    "LastName": "Brummett",
+    "EmailAddress": "tbrummett@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Lecturer",
+    "Phone": "--",
+    "Building": "Bruner Hall (BRUN) 329",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Benjamin",
+    "LastName": "Burchfield",
+    "EmailAddress": "bburchfield@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Lecturer",
+    "Phone": "931-372-3122",
+    "Building": "Bruner Hall (BRUN) 430",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Amy",
+    "LastName": "Davis",
+    "EmailAddress": "aldavis@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Coordinator",
+    "Phone": "931-372-6061",
+    "Building": "Bruner Hall (BRUN) 240",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Emily",
+    "LastName": "Disbrow",
+    "EmailAddress": "edisbrow@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Administrative Associate 4",
+    "Phone": "931-372-3691",
+    "Building": "Bruner Hall (BRUN) 238",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "William",
+    "LastName": "Eberle",
+    "EmailAddress": "WEberle@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Professor",
+    "Phone": "931-372-3278",
+    "Building": "Bruner Hall (BRUN) 235",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Cyril",
+    "LastName": "Focht",
+    "EmailAddress": "cfocht@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Adjunct Faculty",
+    "Phone": "931-372-3137",
+    "Building": "Bruner Hall (BRUN) 428",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Barbara",
+    "LastName": "Gannod",
+    "EmailAddress": "bgannod@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Adjunct Faculty",
+    "Phone": "--",
+    "Building": "Bruner Hall (BRUN) 233",
+    "POBox": ""
+  },
+  {
+    "FirstName": "Jerry",
+    "LastName": "Gannod",
+    "EmailAddress": "jgannod@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Chairperson",
+    "Phone": "931-372-3691",
+    "Building": "Bruner Hall (BRUN) 242",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Sheikh",
+    "LastName": "Ghafoor",
+    "EmailAddress": "SGhafoor@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Professor",
+    "Phone": "931-372-3687",
+    "Building": "Bruner Hall (BRUN) 429",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Maanak",
+    "LastName": "Gupta",
+    "EmailAddress": "mgupta@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Assistant Professor",
+    "Phone": "931-372-3525",
+    "Building": "Prescott Hall (PRSC) 408",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Danyelle",
+    "LastName": "Hawkins",
+    "EmailAddress": "ldhawkins@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Adjunct Faculty",
+    "Phone": "931-372-6281",
+    "Building": "Volpe Library/Learning Assist (LIBR) 180",
+    "POBox": "5185"
+  },
+  {
+    "FirstName": "Amr",
+    "LastName": "Hilal",
+    "EmailAddress": "ahilal@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Associate Professor",
+    "Phone": "931-372-3253",
+    "Building": "Bruner Hall (BRUN) 233",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Md",
+    "LastName": "Islam",
+    "EmailAddress": "mtislam@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Adjunct Faculty",
+    "Phone": "--",
+    "Building": "",
+    "POBox": ""
+  },
+  {
+    "FirstName": "Beata",
+    "LastName": "Kubiak",
+    "EmailAddress": "bkubiak@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Lecturer",
+    "Phone": "931-372-3222",
+    "Building": "Bruner Hall (BRUN) 332",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Travis",
+    "LastName": "Lee",
+    "EmailAddress": "tlee@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Adjunct Faculty",
+    "Phone": "931-372-3759",
+    "Building": "Prescott Hall (PRSC) 414",
+    "POBox": "5134"
+  },
+  {
+    "FirstName": "Rajesh",
+    "LastName": "Manicavasagam",
+    "EmailAddress": "rmanicavasagam@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Instructor",
+    "Phone": "931-372-6127",
+    "Building": "Prescott Hall (PRSC) 406",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Joshua",
+    "LastName": "Miller",
+    "EmailAddress": "joshuamiller@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Temporary Help Non-Exempt",
+    "Phone": "--",
+    "Building": "",
+    "POBox": ""
+  },
+  {
+    "FirstName": "Muhammad",
+    "LastName": "Muhammad",
+    "EmailAddress": "mismail@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Associate Professor",
+    "Phone": "931-372-6287",
+    "Building": "Bruner Hall (BRUN) 332",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "MD S Zulkar",
+    "LastName": "Nine",
+    "EmailAddress": "mnine@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Assistant Professor",
+    "Phone": "931-372-3137",
+    "Building": "Bruner Hall (BRUN) 428",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Mir",
+    "LastName": "Pritom",
+    "EmailAddress": "mpritom@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Assistant Professor",
+    "Phone": "931-372-3496",
+    "Building": "Bruner Hall (BRUN) 236",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Michael",
+    "LastName": "Rogers",
+    "EmailAddress": "MRogers@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Associate Professor",
+    "Phone": "931-372-6304",
+    "Building": "Bruner Hall (BRUN) 427",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Susmit",
+    "LastName": "Shannigrahi",
+    "EmailAddress": "sshannigrahi@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Assistant Professor",
+    "Phone": "931-372-6259",
+    "Building": "Bruner Hall (BRUN) 331",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Anthony",
+    "LastName": "Skjellum",
+    "EmailAddress": "askjellum@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Professor",
+    "Phone": "931-372-6484",
+    "Building": "Bruner Hall (BRUN) 431",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Douglas",
+    "LastName": "Talbert",
+    "EmailAddress": "DTalbert@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Professor",
+    "Phone": "931-372-6178",
+    "Building": "Bruner Hall (BRUN) 234",
+    "POBox": "5101"
+  },
+  {
+    "FirstName": "Paul",
+    "LastName": "Tinker",
+    "EmailAddress": "ptinker@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Adjunct Faculty",
+    "Phone": "--",
+    "Building": "",
+    "POBox": ""
+  }
+]
