@@ -6,3 +6,7 @@ class Event_Attendee(object, event, attendee):
         self.__event = event
         self.__attendee = attendee
         self.__state = ""
+
+        @property
+        def event(self):
+            return self.__event
