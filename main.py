@@ -4,7 +4,7 @@ from classes.Event import Event
 
 import json
 import calendar
-with open('cs_directory.json') as f:
+with open('attendees.json') as f:
     csd = json.load(f)
 with open('events.json') as g:
     event_data = json.load(g)
