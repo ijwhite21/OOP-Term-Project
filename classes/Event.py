@@ -27,5 +27,5 @@ class Event(object):
         return self.__duration
 
     def __str__(self):
-        return "Event: {}\nDate: {}\nStart time: {}\nDuration: {} hours\nLocation: {}"\
+        return "Event: {}\nDate: {}\nStart time: {}\nDuration: {} hours\nLocation: {}\n"\
             .format(self.name, self.date, self.start_time, self.duration, self.location)
