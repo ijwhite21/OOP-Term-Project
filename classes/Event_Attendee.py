@@ -1,6 +1,7 @@
 from classes.Attendee import Attendee
 from classes.Event import Event
 
+# This class represents a tuple of Event and Attendee objects. Meaning the Attendee is attending the Event
 class Event_Attendee(object):
     def __init__(self, e: Event, a: Attendee):
         self.__event: Event = e

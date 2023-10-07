@@ -1,3 +1,4 @@
+# This is the Event class that holds all of the event info ie name, date, location etc
 class Event(object):
     def __init__(self, val: dict):
         self.__name = val["Name"]

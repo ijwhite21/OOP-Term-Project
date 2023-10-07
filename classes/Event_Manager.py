@@ -2,6 +2,7 @@ from classes.Event_Attendee import Event_Attendee
 from classes.Event import Event
 from classes.Attendee import Attendee
 
+# This class is meant to manage the Events, Attendees, and Event_Attendees
 class EventManager(object):
     def __init__(self):
         self.__events = []
@@ -32,14 +33,16 @@ class EventManager(object):
     def event_attendees(self, ea: list):
         self.__event_attendees = ea
 
+    # This function appends a new event object onto the 'events' array
     def add_event(self, e: dict):
         x = e
         self.events.append(Event(e))
 
-
+    # This function appends a new attendee object onto the array 'attendees'
     def add_attendee(self, a: dict):
         self.__attendees.append(Attendee(a))
 
+    # This will append a new Event_Attendee object into the array 'event_attendees'
     def add_event_attendee(self, event: Event, attendee: Attendee):
         self.__event_attendees.append(Event_Attendee(event, attendee))
 
