@@ -17,17 +17,15 @@ with open('events.json') as g:
 if __name__ == '__main__':
     #initialize the EventManager object (there's only 1 instance of it)
     em = EventManager()
+    #load pre-existing attendees into em
+    for x in attendee_data:
+        em.add_attendee(x)
+    # add all events from the events.json into the event manager
+    for x in event_data["university_events"]:
+        em.add_event(x)
     # initialize the gui object (from tkinter)
     gui = Gui(em)
 
-    # # add all events from the events.json into the event manager
-    # for x in event_data["university_events"]:
-    #     em.add_event(x)
-    #
-    # # add all attendees from the attendees.json into the event manager
-    # for x in attendee_data:
-    #     em.add_attendee(x)
-    #
     # # create a few event_attendees ie pairing up some attendees with some events for testing
     # for i in range(len(event_data["university_events"])):
     #     em.add_event_attendee(em.events[i], em.attendees[i])
