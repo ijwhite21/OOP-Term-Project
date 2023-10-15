@@ -15,10 +15,10 @@ with open('events.json') as g:
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # initialize the gui object (from tkinter)
-    gui = Gui()
     #initialize the EventManager object (there's only 1 instance of it)
     em = EventManager()
+    # initialize the gui object (from tkinter)
+    gui = Gui(em)
 
     # # add all events from the events.json into the event manager
     # for x in event_data["university_events"]:
