@@ -47,4 +47,6 @@ class EventManager(object):
         self.__event_attendees.append(Event_Attendee(event, attendee))
 
     def __str__(self):
-        return "\n".join(map(str, self.event_attendees))
+        # return "\n".join(map(str, self.event_attendees))
+        return "\n".join(map(str, self.attendees))
+        # return "\n".join(map(str, self.events))
