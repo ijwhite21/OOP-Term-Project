@@ -145,7 +145,7 @@ class Gui:
         # this text box is for entering the first name
         self.eventname_entry = Entry(self.frame)
 
-        self.label_eventdate = Label(self.frame, text="Date", font=(self.font, self.fontsize))
+        self.label_eventdate = Label(self.frame, text="Date (yyyy-mm-dd)", font=(self.font, self.fontsize))
         self.eventdate_entry = Entry(self.frame)
 
         self.label_eventstarttime = Label(self.frame, text="Start Time", font=(self.font, self.fontsize))
@@ -154,7 +154,7 @@ class Gui:
         self.label_eventlocation = Label(self.frame, text="Location", font=(self.font, self.fontsize))
         self.eventlocation_entry = Entry(self.frame)
 
-        self.label_eventduration = Label(self.frame, text="Duration", font=(self.font, self.fontsize))
+        self.label_eventduration = Label(self.frame, text="Duration (hours)", font=(self.font, self.fontsize))
         self.eventduration_entry = Entry(self.frame)
 
         # the pack() function will put the Gui component in the next available
@@ -185,7 +185,7 @@ class Gui:
             alist.append(f"{x.lastname}, {x.firstname}")
         list_items = Variable(value=alist)
         self.listbox = Listbox(self.frame, height=len(alist), font=(self.font, self.fontsize), listvariable=list_items)
-        self.listbox.bind('<<ListboxSelect>>', self.items_selected)
+        # self.listbox.bind('<<ListboxSelect>>', self.items_selected)
         self.listbox.pack()
 
         # for x in self.em.attendees:
