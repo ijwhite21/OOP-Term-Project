@@ -79,7 +79,7 @@ class Gui:
         # print(attendee1)
         self.em.add_attendee(a)
         # This prints the attendee onto the gui
-        self.label_attendee = Label(self.frame, text=self.em.attendees[-1], font=('Arial', 18))
+        self.label_attendee = Label(self.frame, text="Attendee Added", font=('Arial', 18))
         self.label_attendee.pack()
         # print(self.em)
 
@@ -99,9 +99,9 @@ class Gui:
         # print(attendee1)
         self.em.add_event(a)
         # This prints the attendee onto the gui
-        self.label_event = Label(self.frame, text=self.em.events[-1], font=('Arial', 18))
+        self.label_event = Label(self.frame, text="Event Added", font=('Arial', 18))
         self.label_event.pack()
-        # print(self.em)
+
 
     # This function creates the "Create Attendee" screen
     def attendee_screen(self):
@@ -182,9 +182,9 @@ class Gui:
         alist = []
         # get attendees in the form of a list of first and last names
         for x in self.em.attendees:
-            alist.append(x.firstname + " " + x.lastname)
+            alist.append(f"{x.lastname}, {x.firstname}")
         list_items = Variable(value=alist)
-        self.listbox = Listbox(self.frame, height=len(alist), listvariable=list_items)
+        self.listbox = Listbox(self.frame, height=len(alist), font=(self.font, self.fontsize), listvariable=list_items)
         self.listbox.bind('<<ListboxSelect>>', self.items_selected)
         self.listbox.pack()
 
@@ -192,14 +192,17 @@ class Gui:
         #     self.attendee_name = Label(self.frame, text=x.firstname+" "+x.lastname, font=(self.font, self.fontsize))
         #     self.attendee_name.pack()
 
+    # When selected an attendee in event dropdown list
     def items_selected(self, event):
-        # get all selected indices
-        selected_indices = self.listbox.curselection()
-        # get selected items
-        selected_langs = ",".join([self.listbox.get(i) for i in selected_indices])
-        msg = f'You selected: {selected_langs}'
-        # self.label8 = Label(self.frame, text=selected_indices, font=(self.font, self.fontsize))
-        # self.label8.pack()
+        self.listbox_attendees.destroy()
+        self.button_list_attendees["state"] = "normal"
+        # # get all selected indices
+        # selected_indices = self.listbox.curselection()
+        # # get selected items
+        # selected_langs = ",".join([self.listbox.get(i) for i in selected_indices])
+        # msg = f'You selected: {selected_langs}'
+        # # self.label8 = Label(self.frame, text=selected_indices, font=(self.font, self.fontsize))
+        # # self.label8.pack()
 
     # This is called whenever you select an event from the selection list
     def items_selected_event(self, event):
@@ -216,11 +219,14 @@ class Gui:
         self.clear_frame()
         e = self.em.events[selected_indices]
         #get list of names of attendees not currently going to event
-        alist = []
-        for x in self.em.attendees:
-            alist.append(x.firstname + " " + x.lastname)
+        # alist = []
+        # for x in self.em.attendees:
+        #     alist.append(x.firstname + " " + x.lastname)
         self.label_eventsingle = Label(self.frame, text="Event: "+e.name, font=(self.font, self.fontsize))
         self.label_eventsingle.pack()
+
+        self.label_eventsingledate = Label(self.frame, text="Date: " + e.date, font=(self.font, self.fontsize))
+        self.label_eventsingledate.pack()
 
         self.label_eventsinglestarttime = Label(self.frame, text="Time: "+e.start_time, font=(self.font, self.fontsize))
         self.label_eventsinglestarttime.pack()
@@ -231,10 +237,27 @@ class Gui:
         self.label_eventsinglelocation = Label(self.frame, text="Location: "+e.location, font=(self.font, self.fontsize))
         self.label_eventsinglelocation.pack()
 
-        variable = StringVar(self.frame)
-        variable.set("")  # default value
-        w = OptionMenu(self.frame, variable, *alist)
-        w.pack()
+
+        # variable = StringVar(self.frame)
+        # variable.set("")  # default value
+        # w = OptionMenu(self.frame, variable, *alist)
+        # w.pack()
+
+        # add attendee button
+        self.button_list_attendees = Button(self.frame, text="Add Attendee", font=(self.font, self.fontsize), command=self.list_attendees)
+        self.button_list_attendees.pack()
+
+    # This makes a dropdown selection list of all the attendees
+    def list_attendees(self):
+        alist = []
+        for x in self.em.attendees:
+            alist.append(f"{x.lastname}, {x.firstname}")
+        list_items = Variable(value=alist)
+        self.listbox_attendees = Listbox(self.frame, height=len(alist), listvariable=list_items)
+        self.listbox_attendees.bind('<<ListboxSelect>>', self.items_selected)
+        self.listbox_attendees.pack()
+        self.button_list_attendees["state"] = "disabled"
+
 
     # display all the events in a list
     def display_events(self):
@@ -243,8 +266,8 @@ class Gui:
         elist = []
         # get attendees in the form of a list of first and last names
         for x in self.em.events:
-            elist.append(x.name)
+            elist.append(f"{x.date}: {x.name}")
         list_items = Variable(value=elist)
-        self.listbox_events = Listbox(self.frame, height=len(elist), listvariable=list_items)
+        self.listbox_events = Listbox(self.frame, width=50, height=len(elist), font=(self.font, self.fontsize), listvariable=list_items)
         self.listbox_events.bind('<<ListboxSelect>>', self.items_selected_event)
         self.listbox_events.pack()
