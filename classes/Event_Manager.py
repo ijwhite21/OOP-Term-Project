@@ -37,14 +37,23 @@ class EventManager(object):
     def add_event(self, e: dict):
         x = e
         self.events.append(Event(e))
+        self.sort_events()
 
     # This function appends a new attendee object onto the array 'attendees'
     def add_attendee(self, a: dict):
         self.__attendees.append(Attendee(a))
+        self.sort_attendees()
 
     # This will append a new Event_Attendee object into the array 'event_attendees'
     def add_event_attendee(self, event: Event, attendee: Attendee):
         self.__event_attendees.append(Event_Attendee(event, attendee))
+
+    def sort_attendees(self):
+        # sort the list by lastname (alphabetically)
+        self.attendees.sort(key=lambda x: x.lastname)
+    #This function will sort the events by date and time
+    def sort_events(self):
+        self.events.sort(key=lambda x: x.date, reverse=False)
 
     def __str__(self):
         # return "\n".join(map(str, self.event_attendees))
