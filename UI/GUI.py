@@ -265,6 +265,41 @@ class Gui:
         # self.label8.pack()
         self.display_event_single(int(selected_indices[0]))
 
+    # display a single event_attendee object
+    # TODO
+    def display_event_attendee_single(self, selected_indices):
+        selected_indices = self.listbox_attendees_going.curselection()
+        # get selected items
+        selected_event_attendee = ",".join([self.listbox_attendees_going.get(i) for i in selected_indices])
+        self.clear_frame()
+
+        # this will extract the first and lastnames from the selected index in the dropdownlist of attendees
+        lname = selected_event_attendee.split(", ")[0]
+        fname = selected_event_attendee.split(", ")[1]
+        e = self.em.events[self.current_event]
+
+        # find the event_attendee object correlating with current event and current attendee selected
+        for x in self.em.event_attendees:
+            if x.event == e and x.attendee.lastname == lname and x.attendee.firstname == fname:
+                ea = x
+
+        # ea = self.em.event_attendees[0]
+        self.label_event_attendee = Label(self.frame, text=ea, font=(self.font, self.fontsize))
+        self.label_event_attendee.pack()
+        # memo textbox
+        self.label_memo = Label(self.frame, text="\nMemo:", font=(self.font, self.fontsize))
+        self.label_memo.pack()
+        self.memotext = Text(self.frame, height=5, font=(self.font, self.fontsize))
+        self.memotext.pack()
+        # insert event_attendee's memo into the textbox
+        self.memotext.insert(END, ea.memo)
+        self.button_memo = Button(self.frame, text="Save Memo", font=(self.font, self.fontsize), command=lambda: self.set_memo(ea))
+        self.button_memo.pack()
+
+    # set the memo for an event_attendee object
+    def set_memo(self, ea):
+        ea.memo = self.memotext.get("1.0",'end-1c')
+
     # This displays a single event using the event's print function
     def display_event_single(self,selected_indices):
         self.clear_frame()
@@ -301,6 +336,7 @@ class Gui:
 
         self.listbox_attendees_going = Listbox(self.frame, width=30, height=len(alist), listvariable=list_items)
         self.listbox_attendees_going.pack()
+        self.listbox_attendees_going.bind('<<ListboxSelect>>', self.display_event_attendee_single)
         # set the state of the buttons
         self.button_list_attendees_going["state"] = "disabled"
         self.button_list_attendees["state"] = "normal"

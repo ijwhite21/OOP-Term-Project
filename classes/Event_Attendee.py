@@ -18,12 +18,12 @@ class Event_Attendee(object):
         return self.__attendee
 
     @property
-    def attendee_name(self):
-        return self.__attendee_name
-
-    @property
     def memo(self):
         return self.__memo
 
+    @memo.setter
+    def memo(self, m):
+        self.__memo = m
+
     def __str__(self):
-        return "{} {} going to {}".format(self.attendee.firstname, self.attendee.lastname, self.event.name)
+        return "{} {}\nattending\n{}".format(self.attendee.firstname, self.attendee.lastname, self.event.name)
