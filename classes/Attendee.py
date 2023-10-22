@@ -2,6 +2,7 @@ class Attendee(object):
     def __init__(self, val: dict):
         self.__lastname = val["LastName"]
         self.__firstname = val["FirstName"]
+        self.__UID = val["UID"]
         if "MiddleName" in val:
             self.__middlename = val["MiddleName"]
         self.__email = val["EmailAddress"]
@@ -20,6 +21,10 @@ class Attendee(object):
     @property
     def firstname(self):
         return self.__firstname
+
+    @property
+    def UID(self):
+        return self.__UID
 
     @property
     def email(self):
@@ -47,10 +52,11 @@ class Attendee(object):
 
     def __str__(self):
         return "{} {}\nTitle: {}\nEmail: {}\nDepartment: {}\nPhone: {}\n"\
-               "Building: {}\n".format(self.firstname,
+               "Building: {}\nUID: {}".format(self.firstname,
                                                    self.lastname,
                                                    self.title,
                                                    self.email,
                                                    self.department,
                                                    self.phone,
-                                                   self.building)
+                                                   self.building,
+                                                   self.UID)

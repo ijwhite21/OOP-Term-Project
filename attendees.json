@@ -2,6 +2,7 @@
   {
     "FirstName": "Amani",
     "LastName": "Altarawneh",
+    "UID": 0,
     "EmailAddress": "aaltarawneh@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Assistant Professor",
@@ -12,6 +13,7 @@
   {
     "FirstName": "Mark",
     "LastName": "Boshart",
+    "UID": 1,
     "EmailAddress": "MBoshart@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Adjunct Faculty",
@@ -22,6 +24,7 @@
   {
     "FirstName": "Travis",
     "LastName": "Brummett",
+    "UID": 2,
     "EmailAddress": "tbrummett@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Lecturer",
@@ -32,6 +35,7 @@
   {
     "FirstName": "Benjamin",
     "LastName": "Burchfield",
+    "UID": 3,
     "EmailAddress": "bburchfield@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Lecturer",
@@ -42,6 +46,7 @@
   {
     "FirstName": "Amy",
     "LastName": "Davis",
+    "UID": 4,
     "EmailAddress": "aldavis@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Coordinator",
@@ -52,6 +57,7 @@
   {
     "FirstName": "Emily",
     "LastName": "Disbrow",
+    "UID": 5,
     "EmailAddress": "edisbrow@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Administrative Associate 4",
@@ -62,6 +68,7 @@
   {
     "FirstName": "William",
     "LastName": "Eberle",
+    "UID": 6,
     "EmailAddress": "WEberle@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Professor",
@@ -72,6 +79,7 @@
   {
     "FirstName": "Cyril",
     "LastName": "Focht",
+    "UID": 7,
     "EmailAddress": "cfocht@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Adjunct Faculty",
@@ -82,6 +90,7 @@
   {
     "FirstName": "Barbara",
     "LastName": "Gannod",
+    "UID": 8,
     "EmailAddress": "bgannod@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Adjunct Faculty",
@@ -92,6 +101,7 @@
   {
     "FirstName": "Jerry",
     "LastName": "Gannod",
+    "UID": 9,
     "EmailAddress": "jgannod@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Chairperson",
@@ -102,6 +112,7 @@
   {
     "FirstName": "Sheikh",
     "LastName": "Ghafoor",
+    "UID": 10,
     "EmailAddress": "SGhafoor@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Professor",
@@ -112,6 +123,7 @@
   {
     "FirstName": "Maanak",
     "LastName": "Gupta",
+    "UID": 11,
     "EmailAddress": "mgupta@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Assistant Professor",
@@ -122,6 +134,7 @@
   {
     "FirstName": "Danyelle",
     "LastName": "Hawkins",
+    "UID": 12,
     "EmailAddress": "ldhawkins@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Adjunct Faculty",
@@ -132,6 +145,7 @@
   {
     "FirstName": "Amr",
     "LastName": "Hilal",
+    "UID": 13,
     "EmailAddress": "ahilal@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Associate Professor",
@@ -142,6 +156,7 @@
   {
     "FirstName": "Md",
     "LastName": "Islam",
+    "UID": 14,
     "EmailAddress": "mtislam@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Adjunct Faculty",
@@ -152,6 +167,7 @@
   {
     "FirstName": "Beata",
     "LastName": "Kubiak",
+    "UID": 15,
     "EmailAddress": "bkubiak@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Lecturer",
@@ -162,6 +178,7 @@
   {
     "FirstName": "Travis",
     "LastName": "Lee",
+    "UID": 16,
     "EmailAddress": "tlee@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Adjunct Faculty",
@@ -172,6 +189,7 @@
   {
     "FirstName": "Rajesh",
     "LastName": "Manicavasagam",
+    "UID": 17,
     "EmailAddress": "rmanicavasagam@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Instructor",
@@ -182,6 +200,7 @@
   {
     "FirstName": "Joshua",
     "LastName": "Miller",
+    "UID": 18,
     "EmailAddress": "joshuamiller@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Temporary Help Non-Exempt",
@@ -192,6 +211,7 @@
   {
     "FirstName": "Muhammad",
     "LastName": "Muhammad",
+    "UID": 19,
     "EmailAddress": "mismail@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Associate Professor",
@@ -202,6 +222,7 @@
   {
     "FirstName": "MD S Zulkar",
     "LastName": "Nine",
+    "UID": 20,
     "EmailAddress": "mnine@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Assistant Professor",
@@ -212,6 +233,7 @@
   {
     "FirstName": "Mir",
     "LastName": "Pritom",
+    "UID": 21,
     "EmailAddress": "mpritom@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Assistant Professor",
@@ -222,6 +244,7 @@
   {
     "FirstName": "Michael",
     "LastName": "Rogers",
+    "UID": 22,
     "EmailAddress": "MRogers@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Associate Professor",
@@ -232,6 +255,7 @@
   {
     "FirstName": "Susmit",
     "LastName": "Shannigrahi",
+    "UID": 23,
     "EmailAddress": "sshannigrahi@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Assistant Professor",
@@ -242,6 +266,7 @@
   {
     "FirstName": "Anthony",
     "LastName": "Skjellum",
+    "UID": 24,
     "EmailAddress": "askjellum@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Professor",
@@ -252,6 +277,7 @@
   {
     "FirstName": "Douglas",
     "LastName": "Talbert",
+    "UID": 25,
     "EmailAddress": "DTalbert@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Professor",
@@ -262,6 +288,7 @@
   {
     "FirstName": "Paul",
     "LastName": "Tinker",
+    "UID": 26,
     "EmailAddress": "ptinker@tntech.edu",
     "Dept": "Computer Science",
     "Title": "Adjunct Faculty",

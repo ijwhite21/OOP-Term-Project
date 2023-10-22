@@ -91,6 +91,7 @@ class Gui:
         a = {
             "FirstName": self.firstname_entry.get(),
             "LastName": self.lastname_entry.get(),
+            "UID": self.em.attendeeUID,
             "EmailAddress": self.email_entry.get(),
             "Dept": "Computer Science",
             "Title": "Assistant Professor",
@@ -114,6 +115,7 @@ class Gui:
         a = {
             "Name": self.eventname_entry.get(),
             "Date": self.eventdate_entry.get(),
+            "UID" : self.em.eventUID,
             "StartTime": self.eventstarttime_entry.get(),
             "Location": self.eventlocation_entry.get(),
             "Duration": self.eventduration_entry.get()
@@ -290,15 +292,21 @@ class Gui:
     # this lists the attendees going to a particular events
     def list_attendees_going(self):
         alist = []
+        # check who all is going to the event ie event_attendees in the list
         for x in self.em.event_attendees:
             if x.event == self.em.events[self.current_event]:
-                alist.append(x.attendee_name)
+                # alist.append(x.attendee_name)
+                alist.append(f"{x.attendee.lastname}, {x.attendee.firstname}")
         list_items = Variable(value=alist)
+
         self.listbox_attendees_going = Listbox(self.frame, width=30, height=len(alist), listvariable=list_items)
         self.listbox_attendees_going.pack()
+        # set the state of the buttons
         self.button_list_attendees_going["state"] = "disabled"
         self.button_list_attendees["state"] = "normal"
+
         self.is_current_attendees_dropdown = True
+        # This will delete the add_attendees dropdown list that would otherwise be in the way
         if self.is_add_attendees_dropdown:
             self.listbox_attendees.destroy()
             self.is_add_attendees_dropdown = False
