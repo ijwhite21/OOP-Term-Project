@@ -3,6 +3,7 @@ class Event(object):
     def __init__(self, val: dict):
         self.__name = val["Name"]
         self.__date = val["Date"]
+        self.__UID = val["UID"]
         self.__start_time = val["StartTime"]
         self.__location = val["Location"]
         self.__duration = val["Duration"]
@@ -10,6 +11,10 @@ class Event(object):
     @property
     def name(self):
         return self.__name
+
+    @property
+    def UID(self):
+        return self.__UID
 
     @property
     def date(self):
@@ -28,5 +33,5 @@ class Event(object):
         return self.__duration
 
     def __str__(self):
-        return "Event: {}\nDate: {}\nStart time: {}\nDuration: {} hours\nLocation: {}\n"\
-            .format(self.name, self.date, self.start_time, self.duration, self.location)
+        return "Event: {}\nDate: {}\nStart time: {}\nDuration: {} hours\nLocation: {}\nUID: {}"\
+            .format(self.name, self.date, self.start_time, self.duration, self.location, self.UID)

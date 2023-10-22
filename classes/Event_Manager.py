@@ -8,6 +8,8 @@ class EventManager(object):
         self.__events = []
         self.__attendees = []
         self.__event_attendees = []
+        self.__attendeeUID = 0
+        self.__eventUID = 0
 
     @property
     def events(self):
@@ -21,6 +23,14 @@ class EventManager(object):
     def event_attendees(self) -> list:
         return self.__event_attendees
 
+    @property
+    def attendeeUID(self):
+        return self.__attendeeUID
+
+    @property
+    def eventUID(self):
+        return self.__eventUID
+
     @events.setter
     def events(self, e: list):
         self.__events = e
@@ -33,14 +43,24 @@ class EventManager(object):
     def event_attendees(self, ea: list):
         self.__event_attendees = ea
 
+    @attendeeUID.setter
+    def attendeeUID(self, a):
+        self.__attendeeUID = a
+
+    @eventUID.setter
+    def eventUID(self, e):
+        self.__eventUID = e
+
     # This function appends a new event object onto the 'events' array
     def add_event(self, e: dict):
         x = e
+        self.eventUID = max(self.eventUID, e["UID"]) + 1
         self.events.append(Event(e))
         self.sort_events()
 
     # This function appends a new attendee object onto the array 'attendees'
     def add_attendee(self, a: dict):
+        self.attendeeUID = max(self.attendeeUID, a["UID"]) + 1
         self.__attendees.append(Attendee(a))
         self.sort_attendees()
 
@@ -64,6 +84,6 @@ class EventManager(object):
         self.events.sort(key=lambda x: x.date, reverse=False)
 
     def __str__(self):
-        # return "\n".join(map(str, self.event_attendees))
-        return "\n".join(map(str, self.attendees))
+        return "\n".join(map(str, self.event_attendees))
+        # return "\n".join(map(str, self.attendees))
         # return "\n".join(map(str, self.events))

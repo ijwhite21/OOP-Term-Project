@@ -2,6 +2,7 @@
   "university_events": [
     {
       "Name": "Lecture on Artificial Intelligence",
+      "UID": 0,
       "Date": "2023-10-15",
       "StartTime": "14:00",
       "Location": "Room 101, Engineering Building",
@@ -9,6 +10,7 @@
     },
     {
       "Name": "Career Fair",
+      "UID": 1,
       "Date": "2023-11-05",
       "StartTime": "10:00",
       "Location": "Student Center",
@@ -16,6 +18,7 @@
     },
     {
       "Name": "Music Concert",
+      "UID": 2,
       "Date": "2023-12-08",
       "StartTime": "19:30",
       "Location": "University Auditorium",
@@ -23,6 +26,7 @@
     },
     {
       "Name": "Sports Day",
+      "UID": 3,
       "Date": "2023-09-22",
       "StartTime": "08:00",
       "Location": "University Sports Complex",
