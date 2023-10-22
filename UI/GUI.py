@@ -6,12 +6,18 @@ from classes.Event_Manager import EventManager
 from classes.Attendee import Attendee
 
 class Gui:
+    # Gui constructor. NOTE: an Event_Manager object is passed into the constructor. This is so that the Gui class can pass data into it.
     def __init__(self, eventmanager):
         #establish font
         self.fontsize = 18
         self.font = 'Arial'
         # We've instantiated an event manager in main. We then aggregate it onto the Gui so that it can receive form submissions etc
         self.em = eventmanager
+        # This variable is used to create an Event_Attendee object later on
+        self.current_event = 0
+        # These are used to destroy the dropdown lists on the same page
+        self.is_current_attendees_dropdown = False
+        self.is_add_attendees_dropdown = False
         #This adds the tk functionality to the Gui class
         self.root = Tk()
         # this is where a lot of the visuals can be declared (kinda like CSS) (inbetween the dotted lines)
@@ -23,7 +29,7 @@ class Gui:
         self.root.protocol("WM_DELETE_WINDOW", self.on_closing)
 
         #create the frame for the side buttons "Create Attendee", "Create Event", etc (this will always be here)
-        self.sidebuttons = Frame(self.root)
+        self.sidebuttons = LabelFrame(self.root, padx=2, pady=10)
         self.sidebuttons.pack(side="left", expand=False, fill="both")
 
         #add attendee button
@@ -44,7 +50,7 @@ class Gui:
 
 
         #establish the frame that will house each type of form. this will be cleared, then repopulated will the selected form or "state"
-        self.frame = Frame(self.root)
+        self.frame = LabelFrame(self.root, padx=0, pady=10)
         self.frame.pack(side="right", expand=True, fill="both")
 
         # this is the loop that refreshes the GUI
@@ -59,6 +65,25 @@ class Gui:
     def clear_frame(self):
         for widgets in self.frame.winfo_children():
             widgets.destroy()
+
+    # this function disables the button you have clicked (mainly to mark which page you are currently on)
+    def button_state(self, button: str):
+        self.button_add_attendee["state"] = "normal"
+        self.button_add_event["state"] = "normal"
+        self.button_display_attendees["state"] = "normal"
+        self.button_display_events["state"] = "normal"
+
+        if button == "add_attendee":
+            self.button_add_attendee["state"] = "disabled"
+
+        elif button == "add_event":
+            self.button_add_event["state"] = "disabled"
+
+        elif button == "display_attendees":
+            self.button_display_attendees["state"] = "disabled"
+
+        elif button == "display_events":
+            self.button_display_events["state"] = "disabled"
 
     # This function is called whenever you click the "Create" button on the "Create Attendee" screen
     def form_submission_attendee(self):
@@ -102,11 +127,11 @@ class Gui:
         self.label_event = Label(self.frame, text="Event Added", font=('Arial', 18))
         self.label_event.pack()
 
-
     # This function creates the "Create Attendee" screen
     def attendee_screen(self):
         self.clear_frame()
 
+        self.button_state("add_attendee")
         # these are label definitions followed by text entry box definitions for each attribute
         # this label will simply say 'First Name' above the text box
         self.label_firstname = Label(self.frame, text="First Name", font=(self.font, self.fontsize))
@@ -139,6 +164,7 @@ class Gui:
     def event_screen(self):
         self.clear_frame()
 
+        self.button_state("add_event")
         # these are label definitions followed by text entry box definitions for each attribute
         # this label will simply say 'First Name' above the text box
         self.label_eventname = Label(self.frame, text="Event Name", font=(self.font, self.fontsize))
@@ -179,30 +205,52 @@ class Gui:
     # display all the attendees in a list
     def display_attendees(self):
         self.clear_frame()
+        self.button_state("display_attendees")
         alist = []
         # get attendees in the form of a list of first and last names
         for x in self.em.attendees:
             alist.append(f"{x.lastname}, {x.firstname}")
         list_items = Variable(value=alist)
         self.listbox = Listbox(self.frame, height=len(alist), font=(self.font, self.fontsize), listvariable=list_items)
-        # self.listbox.bind('<<ListboxSelect>>', self.items_selected)
+        self.listbox.bind('<<ListboxSelect>>', self.select_attendee)
         self.listbox.pack()
 
         # for x in self.em.attendees:
         #     self.attendee_name = Label(self.frame, text=x.firstname+" "+x.lastname, font=(self.font, self.fontsize))
         #     self.attendee_name.pack()
 
+    # when an attendee is selected from the list to see their info
+    def select_attendee(self, event):
+        # get all selected indices
+        selected_indices = self.listbox.curselection()
+        # get selected items
+        selected_events = ",".join([self.listbox.get(i) for i in selected_indices])
+        msg = f'You selected: {selected_events}'
+        # self.label8 = Label(self.frame, text=selected_indices, font=(self.font, self.fontsize))
+        # self.label8.pack()
+        self.display_attendee_single(int(selected_indices[0]))
+
+    #This will display a single attendee's info once clicked from the dropdown menu
+    def display_attendee_single(self, selected_indices):
+        self.clear_frame()
+        e = self.em.attendees[selected_indices]
+        self.label_eventsingle = Label(self.frame, text=e, font=(self.font, self.fontsize))
+        self.label_eventsingle.pack()
+
     # When selected an attendee in event dropdown list
     def items_selected(self, event):
-        self.listbox_attendees.destroy()
         self.button_list_attendees["state"] = "normal"
-        # # get all selected indices
-        # selected_indices = self.listbox.curselection()
+
+        # get all selected indices
+        selected_indices = self.listbox_attendees.curselection()
+        selected_langs = ",".join([self.listbox_attendees.get(i) for i in selected_indices])
+        self.em.add_event_attendee(self.em.events[self.current_event], self.em.attendees[selected_indices[0]])
         # # get selected items
-        # selected_langs = ",".join([self.listbox.get(i) for i in selected_indices])
         # msg = f'You selected: {selected_langs}'
         # # self.label8 = Label(self.frame, text=selected_indices, font=(self.font, self.fontsize))
         # # self.label8.pack()
+        self.listbox_attendees.destroy()
+        # print(self.em.event_attendees[len(self.em.event_attendees)-1])
 
     # This is called whenever you select an event from the selection list
     def items_selected_event(self, event):
@@ -215,54 +263,70 @@ class Gui:
         # self.label8.pack()
         self.display_event_single(int(selected_indices[0]))
 
+    # This displays a single event using the event's print function
     def display_event_single(self,selected_indices):
         self.clear_frame()
+        self.current_event = selected_indices
         e = self.em.events[selected_indices]
         #get list of names of attendees not currently going to event
         # alist = []
         # for x in self.em.attendees:
         #     alist.append(x.firstname + " " + x.lastname)
-        self.label_eventsingle = Label(self.frame, text="Event: "+e.name, font=(self.font, self.fontsize))
+
+        self.label_eventsingle = Label(self.frame, text=e, font=(self.font, self.fontsize))
         self.label_eventsingle.pack()
-
-        self.label_eventsingledate = Label(self.frame, text="Date: " + e.date, font=(self.font, self.fontsize))
-        self.label_eventsingledate.pack()
-
-        self.label_eventsinglestarttime = Label(self.frame, text="Time: "+e.start_time, font=(self.font, self.fontsize))
-        self.label_eventsinglestarttime.pack()
-
-        self.label_eventsingleduration = Label(self.frame, text="Duration: "+str(int(e.duration))+" hours", font=(self.font, self.fontsize))
-        self.label_eventsingleduration.pack()
-
-        self.label_eventsinglelocation = Label(self.frame, text="Location: "+e.location, font=(self.font, self.fontsize))
-        self.label_eventsinglelocation.pack()
-
 
         # variable = StringVar(self.frame)
         # variable.set("")  # default value
         # w = OptionMenu(self.frame, variable, *alist)
         # w.pack()
-
+        # This button will show current attendees for a given event
+        self.button_list_attendees_going = Button(self.frame, text="Current Attendees", font=(self.font, self.fontsize), command=self.list_attendees_going)
+        self.button_list_attendees_going.pack()
         # add attendee button
         self.button_list_attendees = Button(self.frame, text="Add Attendee", font=(self.font, self.fontsize), command=self.list_attendees)
         self.button_list_attendees.pack()
 
-    # This makes a dropdown selection list of all the attendees
+    # this lists the attendees going to a particular events
+    def list_attendees_going(self):
+        alist = []
+        for x in self.em.event_attendees:
+            if x.event == self.em.events[self.current_event]:
+                alist.append(x.attendee_name)
+        list_items = Variable(value=alist)
+        self.listbox_attendees_going = Listbox(self.frame, width=30, height=len(alist), listvariable=list_items)
+        self.listbox_attendees_going.pack()
+        self.button_list_attendees_going["state"] = "disabled"
+        self.button_list_attendees["state"] = "normal"
+        self.is_current_attendees_dropdown = True
+        if self.is_add_attendees_dropdown:
+            self.listbox_attendees.destroy()
+            self.is_add_attendees_dropdown = False
+
+
+    # This makes a dropdown selection list of all the attendees (to add to an event)
     def list_attendees(self):
         alist = []
         for x in self.em.attendees:
             alist.append(f"{x.lastname}, {x.firstname}")
         list_items = Variable(value=alist)
-        self.listbox_attendees = Listbox(self.frame, height=len(alist), listvariable=list_items)
+        self.listbox_attendees = Listbox(self.frame, width=30, height=len(alist), listvariable=list_items)
         self.listbox_attendees.bind('<<ListboxSelect>>', self.items_selected)
         self.listbox_attendees.pack()
         self.button_list_attendees["state"] = "disabled"
+        self.button_list_attendees_going["state"] = "normal"
+        self.is_add_attendees_dropdown = True
+        if self.is_current_attendees_dropdown:
+            self.listbox_attendees_going.destroy()
+            self.is_current_attendees_dropdown = False
+
+
 
 
     # display all the events in a list
     def display_events(self):
         self.clear_frame()
-
+        self.button_state("display_events")
         elist = []
         # get attendees in the form of a list of first and last names
         for x in self.em.events:
