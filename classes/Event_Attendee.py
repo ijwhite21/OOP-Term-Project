@@ -6,6 +6,7 @@ class Event_Attendee(object):
     def __init__(self, e: Event, a: Attendee):
         self.__event: Event = e
         self.__attendee: Attendee = a
+        self.__attendee_name = f"{a.firstname} {a.lastname}"
         self.state = ""
 
     @property
@@ -15,6 +16,10 @@ class Event_Attendee(object):
     @property
     def attendee(self):
         return self.__attendee
+
+    @property
+    def attendee_name(self):
+        return self.__attendee_name
 
     def __str__(self):
         return "{} {} going to {}".format(self.attendee.firstname, self.attendee.lastname, self.event.name)

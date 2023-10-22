@@ -46,7 +46,15 @@ class EventManager(object):
 
     # This will append a new Event_Attendee object into the array 'event_attendees'
     def add_event_attendee(self, event: Event, attendee: Attendee):
-        self.__event_attendees.append(Event_Attendee(event, attendee))
+        already = False
+        # Check if the event attendee already exists
+        for x in self.event_attendees:
+            if x.event == event and x.attendee == attendee:
+                already = True
+                break
+        # if the event_attendee doesn't already exist, create it
+        if already == False:
+            self.__event_attendees.append(Event_Attendee(event, attendee))
 
     def sort_attendees(self):
         # sort the list by lastname (alphabetically)
