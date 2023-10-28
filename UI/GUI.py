@@ -61,7 +61,7 @@ class Gui:
         # if messagebox.askyesno(title="Quit?", message="Leaving?... Seriously?"):
             self.root.destroy()
 
-    # This clears the frame of all widgets. This is for switching between different views
+    # This clears the frame of all widgets. This is called every time the menu changes to another screen
     def clear_frame(self):
         for widgets in self.frame.winfo_children():
             widgets.destroy()
@@ -84,50 +84,6 @@ class Gui:
 
         elif button == "display_events":
             self.button_display_events["state"] = "disabled"
-
-    # This function is called whenever you click the "Create" button on the "Create Attendee" screen
-    def form_submission_attendee(self):
-        # a dictionary is created with attendee info then used to create an attendee
-        a = {
-            "FirstName": self.firstname_entry.get(),
-            "LastName": self.lastname_entry.get(),
-            "UID": self.em.attendeeUID,
-            "EmailAddress": self.email_entry.get(),
-            "Dept": "Computer Science",
-            "Title": "Assistant Professor",
-            "Phone": self.phone_entry.get(),
-            "Building": "Bruner Hall (BRUN) 232",
-            "POBox": "5101"
-            }
-
-        # testing to see if the info can construct an attendee object
-        # attendee1 = Attendee(a)
-        # print(attendee1)
-        self.em.add_attendee(a)
-        # This prints the attendee onto the gui
-        self.label_attendee = Label(self.frame, text="Attendee Added", font=('Arial', 18))
-        self.label_attendee.pack()
-        # print(self.em)
-
-    # This function is called when you click the "Create" button on the "Create Event" screen
-    def form_submission_event(self):
-        # a dictionary is created with attendee info then used to create an attendee
-        a = {
-            "Name": self.eventname_entry.get(),
-            "Date": self.eventdate_entry.get(),
-            "UID" : self.em.eventUID,
-            "StartTime": self.eventstarttime_entry.get(),
-            "Location": self.eventlocation_entry.get(),
-            "Duration": self.eventduration_entry.get()
-        }
-
-        # testing to see if the info can construct an attendee object
-        # attendee1 = Attendee(a)
-        # print(attendee1)
-        self.em.add_event(a)
-        # This prints the attendee onto the gui
-        self.label_event = Label(self.frame, text="Event Added", font=('Arial', 18))
-        self.label_event.pack()
 
     # This function creates the "Create Attendee" screen
     def attendee_screen(self):
@@ -161,6 +117,30 @@ class Gui:
         # pressing this button in the Gui will create a new attendee with the entered info from the above text boxes
         self.button = Button(self.frame, text="Create", font=(self.font, self.fontsize), command=self.form_submission_attendee)
         self.button.pack()
+
+    # This function is called whenever you click the "Create" button on the "Create Attendee" screen
+    def form_submission_attendee(self):
+        # a dictionary is created with attendee info then used to create an attendee
+        a = {
+            "FirstName": self.firstname_entry.get(),
+            "LastName": self.lastname_entry.get(),
+            "UID": self.em.attendeeUID,
+            "EmailAddress": self.email_entry.get(),
+            "Dept": "Computer Science",
+            "Title": "Assistant Professor",
+            "Phone": self.phone_entry.get(),
+            "Building": "Bruner Hall (BRUN) 232",
+            "POBox": "5101"
+            }
+
+        # testing to see if the info can construct an attendee object
+        # attendee1 = Attendee(a)
+        # print(attendee1)
+        self.em.add_attendee(a)
+        # This prints the attendee onto the gui
+        self.label_attendee = Label(self.frame, text="Attendee Added", font=('Arial', 18))
+        self.label_attendee.pack()
+        # print(self.em)
 
     # This function creates the "Create Event" screen
     def event_screen(self):
@@ -204,6 +184,26 @@ class Gui:
         self.button = Button(self.frame, text="Create", font=(self.font, self.fontsize), command=self.form_submission_event)
         self.button.pack()
 
+    # This function is called when you click the "Create" button on the "Create Event" screen
+    def form_submission_event(self):
+        # a dictionary is created with attendee info then used to create an attendee
+        a = {
+            "Name": self.eventname_entry.get(),
+            "Date": self.eventdate_entry.get(),
+            "UID" : self.em.eventUID,
+            "StartTime": self.eventstarttime_entry.get(),
+            "Location": self.eventlocation_entry.get(),
+            "Duration": self.eventduration_entry.get()
+        }
+
+        # testing to see if the info can construct an attendee object
+        # attendee1 = Attendee(a)
+        # print(attendee1)
+        self.em.add_event(a)
+        # This prints the attendee onto the gui
+        self.label_event = Label(self.frame, text="Event Added", font=('Arial', 18))
+        self.label_event.pack()
+
     # display all the attendees in a list
     def display_attendees(self):
         self.clear_frame()
@@ -235,24 +235,24 @@ class Gui:
     #This will display a single attendee's info once clicked from the dropdown menu
     def display_attendee_single(self, selected_indices):
         self.clear_frame()
+        self.button_back = Button(self.frame, text="Back", font=(self.font, self.fontsize), command=self.display_attendees)
+        self.button_back.pack()
         e = self.em.attendees[selected_indices]
         self.label_eventsingle = Label(self.frame, text=e, font=(self.font, self.fontsize))
         self.label_eventsingle.pack()
 
-    # When selected an attendee in event dropdown list
-    def items_selected(self, event):
-        self.button_list_attendees["state"] = "normal"
-
-        # get all selected indices
-        selected_indices = self.listbox_attendees.curselection()
-        selected_langs = ",".join([self.listbox_attendees.get(i) for i in selected_indices])
-        self.em.add_event_attendee(self.em.events[self.current_event], self.em.attendees[selected_indices[0]])
-        # # get selected items
-        # msg = f'You selected: {selected_langs}'
-        # # self.label8 = Label(self.frame, text=selected_indices, font=(self.font, self.fontsize))
-        # # self.label8.pack()
-        self.listbox_attendees.destroy()
-        # print(self.em.event_attendees[len(self.em.event_attendees)-1])
+    # display all the events in a list
+    def display_events(self):
+        self.clear_frame()
+        self.button_state("display_events")
+        elist = []
+        # get attendees in the form of a list of first and last names
+        for x in self.em.events:
+            elist.append(f"{x.date}: {x.name}")
+        list_items = Variable(value=elist)
+        self.listbox_events = Listbox(self.frame, width=50, height=len(elist), font=(self.font, self.fontsize), listvariable=list_items)
+        self.listbox_events.bind('<<ListboxSelect>>', self.items_selected_event)
+        self.listbox_events.pack()
 
     # This is called whenever you select an event from the selection list
     def items_selected_event(self, event):
@@ -265,44 +265,11 @@ class Gui:
         # self.label8.pack()
         self.display_event_single(int(selected_indices[0]))
 
-    # display a single event_attendee object
-    # TODO
-    def display_event_attendee_single(self, selected_indices):
-        selected_indices = self.listbox_attendees_going.curselection()
-        # get selected items
-        selected_event_attendee = ",".join([self.listbox_attendees_going.get(i) for i in selected_indices])
-        self.clear_frame()
-
-        # this will extract the first and lastnames from the selected index in the dropdownlist of attendees
-        lname = selected_event_attendee.split(", ")[0]
-        fname = selected_event_attendee.split(", ")[1]
-        e = self.em.events[self.current_event]
-
-        # find the event_attendee object correlating with current event and current attendee selected
-        for x in self.em.event_attendees:
-            if x.event == e and x.attendee.lastname == lname and x.attendee.firstname == fname:
-                ea = x
-
-        # ea = self.em.event_attendees[0]
-        self.label_event_attendee = Label(self.frame, text=ea, font=(self.font, self.fontsize))
-        self.label_event_attendee.pack()
-        # memo textbox
-        self.label_memo = Label(self.frame, text="\nMemo:", font=(self.font, self.fontsize))
-        self.label_memo.pack()
-        self.memotext = Text(self.frame, height=5, font=(self.font, self.fontsize))
-        self.memotext.pack()
-        # insert event_attendee's memo into the textbox
-        self.memotext.insert(END, ea.memo)
-        self.button_memo = Button(self.frame, text="Save Memo", font=(self.font, self.fontsize), command=lambda: self.set_memo(ea))
-        self.button_memo.pack()
-
-    # set the memo for an event_attendee object
-    def set_memo(self, ea):
-        ea.memo = self.memotext.get("1.0",'end-1c')
-
     # This displays a single event using the event's print function
     def display_event_single(self,selected_indices):
         self.clear_frame()
+        self.button_back = Button(self.frame, text="Back", font=(self.font, self.fontsize),command=self.display_events)
+        self.button_back.pack()
         self.current_event = selected_indices
         e = self.em.events[selected_indices]
         #get list of names of attendees not currently going to event
@@ -347,6 +314,41 @@ class Gui:
             self.listbox_attendees.destroy()
             self.is_add_attendees_dropdown = False
 
+    # display a single event_attendee object
+    def display_event_attendee_single(self, selected_indices):
+        selected_indices = self.listbox_attendees_going.curselection()
+        # get selected items
+        selected_event_attendee = ",".join([self.listbox_attendees_going.get(i) for i in selected_indices])
+        self.clear_frame()
+        self.button_back = Button(self.frame, text="Back", font=(self.font, self.fontsize),command=self.display_events)
+        self.button_back.pack()
+
+        # this will extract the first and lastnames from the selected index in the dropdownlist of attendees
+        lname = selected_event_attendee.split(", ")[0]
+        fname = selected_event_attendee.split(", ")[1]
+        e = self.em.events[self.current_event]
+
+        # find the event_attendee object correlating with current event and current attendee selected
+        for x in self.em.event_attendees:
+            if x.event == e and x.attendee.lastname == lname and x.attendee.firstname == fname:
+                ea = x
+
+        # ea = self.em.event_attendees[0]
+        self.label_event_attendee = Label(self.frame, text=ea, font=(self.font, self.fontsize))
+        self.label_event_attendee.pack()
+        # memo textbox
+        self.label_memo = Label(self.frame, text="\nMemo:", font=(self.font, self.fontsize))
+        self.label_memo.pack()
+        self.memotext = Text(self.frame, height=5, font=(self.font, self.fontsize))
+        self.memotext.pack()
+        # insert event_attendee's memo into the textbox
+        self.memotext.insert(END, ea.memo)
+        self.button_memo = Button(self.frame, text="Save Memo", font=(self.font, self.fontsize), command=lambda: self.set_memo(ea))
+        self.button_memo.pack()
+
+    # set the memo for an event_attendee object
+    def set_memo(self, ea):
+        ea.memo = self.memotext.get("1.0",'end-1c')
 
     # This makes a dropdown selection list of all the attendees (to add to an event)
     def list_attendees(self):
@@ -364,18 +366,17 @@ class Gui:
             self.listbox_attendees_going.destroy()
             self.is_current_attendees_dropdown = False
 
+    # When selected an attendee in event dropdown list
+    def items_selected(self, event):
+        self.button_list_attendees["state"] = "normal"
 
-
-
-    # display all the events in a list
-    def display_events(self):
-        self.clear_frame()
-        self.button_state("display_events")
-        elist = []
-        # get attendees in the form of a list of first and last names
-        for x in self.em.events:
-            elist.append(f"{x.date}: {x.name}")
-        list_items = Variable(value=elist)
-        self.listbox_events = Listbox(self.frame, width=50, height=len(elist), font=(self.font, self.fontsize), listvariable=list_items)
-        self.listbox_events.bind('<<ListboxSelect>>', self.items_selected_event)
-        self.listbox_events.pack()
+        # get all selected indices
+        selected_indices = self.listbox_attendees.curselection()
+        selected_langs = ",".join([self.listbox_attendees.get(i) for i in selected_indices])
+        self.em.add_event_attendee(self.em.events[self.current_event], self.em.attendees[selected_indices[0]])
+        # # get selected items
+        # msg = f'You selected: {selected_langs}'
+        # # self.label8 = Label(self.frame, text=selected_indices, font=(self.font, self.fontsize))
+        # # self.label8.pack()
+        self.listbox_attendees.destroy()
+        # print(self.em.event_attendees[len(self.em.event_attendees)-1])
