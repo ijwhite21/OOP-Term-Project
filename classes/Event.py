@@ -43,9 +43,11 @@ class Event(object):
 
     # This function defines what happens when you print the object as text ie print(Event)
     def __str__(self):
-        # python has a few ways of streamlining concatenation of strings.
-        # each time there's a {} in the string, that represents a variable.
-        # notice at the end of the string, ".format()"
-        # the variables passed into this function will replace each {} (in order)
-        return "Event: {}\nDate: {}\nStart time: {}\nDuration: {} hours\nLocation: {}\nUID: {}"\
-            .format(self.name, self.date, self.start_time, self.duration, self.location, self.UID)
+        """
+        python has a few ways of streamlining concatenation of strings.
+        each time there's a {} in the string, that represents a variable.
+        notice at the end of the string, ".format()"
+        the variables passed into this function will replace each {} (in order)
+        """
+        return "Event: {}\nDate: {}\nStart time: {}\nDuration: {} hours\nLocation: {}"\
+            .format(self.name, self.date, self.start_time, self.duration, self.location)

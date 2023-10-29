@@ -13,8 +13,8 @@ class EventManager(object):
         self.__events: list[Event] = []
         self.__contacts: list[Contact] = []
         self.__event_attendees: list[Event_Attendee] = []
-        self.__contactUID: int = 0
-        self.__eventUID: int = 0
+        self.__contactUID: int = 0 # This increments and whenever a new contact is added to the list, it is given a UID
+        self.__eventUID: int = 0 # This increments and whenever a new event is added to the list, it is given a UID
 
     # getters
     @property

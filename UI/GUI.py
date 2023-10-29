@@ -7,7 +7,7 @@ from classes.Contact import Contact
 
 """
 The Gui class handles all of the visuals via the tkinter library. 
-It generally works by calling the EventManager functions via aggregation whenever a button is pressed etc.
+It's set up to call the EventManager's functions via aggregation whenever a button is pressed etc.
 
 NOTE: tkinter generally works by creating frames (areas on the screen to put "stuff" in) and then defining widgets (buttons, labels, text entry boxes etc).
 The widgets do not appear on the screen just from defining them. Once you call the pack() function for each widget, it will place it on the screen.
@@ -22,6 +22,18 @@ example
 
     self.my_button = Button(self.my_frame, text="My Button", font=(self.font, self.fontsize), command=self.my_button_function)
     self.my_button_add_contact.pack()
+    
+This is the foundation for how the Gui's functionality works
+1. Create a frame (area on the screen to put widgets in)
+2. Create a widget (button, text entry box, label, dropdown list etc)
+3. Place the widget into the frame on the screen via pack() or grid()
+
+If you want a function to be called when a button is clicked on etc,
+create the function as you normally would and when you create the button,
+pass "command=self.my_function" WITHOUT THE "()" as an argument
+
+Note: if you need to pass arguments into the function, use "command=lambda: self.my_function(arg1)"
+
 """
 class Gui:
     # Gui constructor. NOTE: an Event_Manager object is passed into the constructor. This is so that the Gui class can pass data into it.
@@ -40,6 +52,8 @@ class Gui:
         self.is_current_attendees_dropdown: bool = False
         self.is_add_attendees_dropdown: bool = False
 
+
+
         #This adds the tk functionality to the Gui class
         self.root = Tk()
         # this is where a lot of the visuals can be declared (kinda like CSS) (inbetween the dotted lines)
@@ -55,6 +69,50 @@ class Gui:
 
         # this is the loop that refreshes the GUI screen
         self.root.mainloop()
+
+
+
+    # This function is called whenever you try to close the window
+    def on_closing(self):
+        # the line below is commented out for convenience. It simply asks if you're sure you want to quit upon exing out
+        # if messagebox.askyesno(title="Quit?", message="Are you sure you want to quit?"):
+            # close the program
+            self.root.destroy()
+
+    # This clears the right-hand frame of all widgets. This is called every time the menu changes to another screen
+    def clear_frame(self):
+        for widgets in self.frame.winfo_children():
+            widgets.destroy()
+
+    # this function disables the button you have clicked (mainly to mark which page you are currently on)
+    # a string is passed in to check which button has been pressed
+    def button_state(self, button: str):
+        # the buttons have 2 states: "normal" and "disabled"
+        # "disabled" will gray it out and make you unable to click it
+
+        # this enables all buttons
+        self.button_add_contact["state"] = "normal"
+        self.button_add_event["state"] = "normal"
+        self.button_display_contacts["state"] = "normal"
+        self.button_display_events["state"] = "normal"
+
+        # this will then check and disable whichever button was pressed
+        if button == "add_contact":
+            self.button_add_contact["state"] = "disabled"
+
+        elif button == "add_event":
+            self.button_add_event["state"] = "disabled"
+
+        elif button == "display_contacts":
+            self.button_display_contacts["state"] = "disabled"
+
+        elif button == "display_events":
+            self.button_display_events["state"] = "disabled"
+
+    """
+    THE FUNCTIONS BELOW THIS LINE APPEAR IN THE GENERAL ORDER THAT THEY WOULD BE CALLED IN THE PROGRAM
+    IF YOU CLICKED EVERY BUTTON IN THE ORDER THAT THEY APPEAR ON THE SCREEN
+    """
 
     # create the side bar (the frame on the left of the screen with the buttons: "Create Contact", "Create Event", "Display Contacts", "Display Events")
     def create_side_bar(self):
@@ -96,46 +154,7 @@ class Gui:
         self.frame = LabelFrame(self.root, padx=0, pady=10)
         self.frame.pack(side="right", expand=True, fill="both")
 
-    # This function is called whenever you try to close the window
-    def on_closing(self):
-        # the line below is commented out for convenience. It simply asks if you're sure you want to quit upon exing out
-        # if messagebox.askyesno(title="Quit?", message="Are you sure you want to quit?"):
-            # close the program
-            self.root.destroy()
-
-    # This clears the right-hand frame of all widgets. This is called every time the menu changes to another screen
-    def clear_frame(self):
-        for widgets in self.frame.winfo_children():
-            widgets.destroy()
-
-    # this function disables the button you have clicked (mainly to mark which page you are currently on)
-    # a string is passed in to check which button has been pressed
-    def button_state(self, button: str):
-        # the buttons have 2 states: "normal" and "disabled"
-        # "disabled" will gray it out and make you unable to click it
-
-        # this enables all buttons
-        self.button_add_contact["state"] = "normal"
-        self.button_add_event["state"] = "normal"
-        self.button_display_contacts["state"] = "normal"
-        self.button_display_events["state"] = "normal"
-
-        # this will then check and disable whichever button was pressed
-        if button == "add_contact":
-            self.button_add_contact["state"] = "disabled"
-
-        elif button == "add_event":
-            self.button_add_event["state"] = "disabled"
-
-        elif button == "display_contacts":
-            self.button_display_contacts["state"] = "disabled"
-
-        elif button == "display_events":
-            self.button_display_events["state"] = "disabled"
-
-
-
-    # This function creates the "Create Contact" screen
+    # This function creates the contact creation screen whenever the "Create Contact" button is pressed
     def contact_screen(self):
         # before creating the screen, we need to clear whatever is there in the frame
         self.clear_frame()
@@ -183,7 +202,7 @@ class Gui:
         self.button = Button(self.frame, text="Create", font=(self.font, self.fontsize), command=self.form_submission_contact)
         self.button.pack()
 
-    # This function is called whenever you click the "Create" button on the "Create contact" screen
+    # This function is called whenever you click the "Create" button on the "Create contact" screen (adding a new contact to the event manager's list)
     def form_submission_contact(self):
         """
         We are collecting the input from each text field and creating a dictionary.
@@ -214,7 +233,7 @@ class Gui:
                                        command=self.contact_screen)
         self.button_add_another_contact.pack()
 
-    # This function creates the "Create Event" screen
+    # This function creates the "Create Event" screen when clicking the button
     def event_screen(self):
         self.clear_frame()
 
@@ -256,7 +275,7 @@ class Gui:
         self.button = Button(self.frame, text="Create", font=(self.font, self.fontsize), command=self.form_submission_event)
         self.button.pack()
 
-    # This function is called when you click the "Create" button on the "Create Event" screen
+    # This function is called when you click the "Create" button on the "Create Event" screen (adding a new event to event managers list)
     def form_submission_event(self):
         # a dictionary is created with event info then used to create an event
         a = {
@@ -278,7 +297,7 @@ class Gui:
                                                  command=self.event_screen)
         self.button_add_another_event.pack()
 
-    # display all the contacts in a list
+    # display all the contacts in a list when clicking the "Display Contacts" button
     def display_contacts(self):
         self.clear_frame()
         self.button_state("display_contacts")
@@ -291,7 +310,7 @@ class Gui:
         self.listbox.bind('<<ListboxSelect>>', self.select_contact)
         self.listbox.pack()
 
-    # when a contact is selected from the list to see their info
+    # when a contact is selected from the list to see their info on the "Display Contacts" screen
     def select_contact(self, event):
         # get all selected indices
         selected_indices = self.listbox.curselection()
@@ -302,18 +321,34 @@ class Gui:
         # self.label8.pack()
         self.display_contact_single(int(selected_indices[0]))
 
-    #This will display a single contact's info once clicked from the dropdown menu
+    #This will display a single contact's info once clicked from the dropdown menu on "Display Contacts" screen
     def display_contact_single(self, selected_indices):
         self.clear_frame()
         # add a back button
         self.button_back = Button(self.frame, text="Back", font=(self.font, self.fontsize), command=self.display_contacts)
         self.button_back.pack()
 
-        e = self.em.contacts[selected_indices]
-        self.label_contactsingle = Label(self.frame, text=e, font=(self.font, self.fontsize), pady=10)
+        c = self.em.contacts[selected_indices]
+        self.label_contactsingle = Label(self.frame, text=c, font=(self.font, self.fontsize), pady=10)
         self.label_contactsingle.pack()
 
-    # display all the events in a list
+        # last point of contact
+        self.label_lastcontact = Label(self.frame, text="\nLast Point of Contact", font=(self.font, self.fontsize))
+        self.label_lastcontact.pack()
+
+        self.lastcontact_entry = Entry(self.frame)
+        self.lastcontact_entry.pack()
+        # set the last point of contact entry box to the contacts attribute "lastcontact"
+        self.lastcontact_entry.insert(END, c.lastcontact)
+        # This button will save the lastcontact_entry's text to the contacts "lastcontact" attribute
+        self.lastcontact_button = Button(self.frame, text="Update Last Point of Contact", font=(self.font, 10), command=lambda: self.set_lastcontact(c))
+        self.lastcontact_button.pack()
+
+    # set the lastcontact attribute for a Contact object. Whenever you click "Update Last Point of Contact"
+    def set_lastcontact(self, c):
+        c.lastcontact = self.lastcontact_entry.get()
+
+    # display all the events in a list when clicking the "Display Events" screen
     def display_events(self):
         self.clear_frame()
         self.button_state("display_events")
@@ -326,7 +361,7 @@ class Gui:
         self.listbox_events.bind('<<ListboxSelect>>', self.items_selected_event)
         self.listbox_events.pack()
 
-    # This is called whenever you select an event from the selection list
+    # This is called whenever you select an event from the selection list on the "Display Events" screen
     def items_selected_event(self, event):
         # get all selected indices
         selected_indices = self.listbox_events.curselection()
@@ -337,7 +372,7 @@ class Gui:
         # self.label8.pack()
         self.display_event_single(int(selected_indices[0]))
 
-    # This displays a single event using the event's print function
+    # This displays a single event using the event's print function. This is whenever you click on it in the selection list on "Display Events" screen
     def display_event_single(self,selected_indices):
         self.clear_frame()
         self.button_back = Button(self.frame, text="Back", font=(self.font, self.fontsize),command=self.display_events)
@@ -358,10 +393,10 @@ class Gui:
         self.button_list_attendees_going = Button(self.frame, text="Current Attendees", font=(self.font, self.fontsize), command=self.list_attendees_going)
         self.button_list_attendees_going.pack()
         # add attendee button
-        self.button_list_contacts = Button(self.frame, text="Add Attendee", font=(self.font, self.fontsize), command=self.list_contacts)
+        self.button_list_contacts = Button(self.frame, text="Add Attendee", font=(self.font, self.fontsize), command=self.add_attendees_list)
         self.button_list_contacts.pack()
 
-    # this lists the attendees (contacts) going to a particular events
+    # this lists the attendees (contacts) going to a particular event whenever you click the "Current Attendees" button
     def list_attendees_going(self):
         alist = []
         # check who all is going to the event ie event_attendees in the list
@@ -383,7 +418,7 @@ class Gui:
             self.listbox_contacts.destroy()
             self.is_add_attendees_dropdown = False
 
-    # display a single event_attendee object
+    # display a single event_attendee object whenever you click on one in the dropdown list on "Display Events" screen
     def display_event_attendee_single(self, selected_indices):
         selected_indices = self.listbox_attendees_going.curselection()
         # get selected items
@@ -396,11 +431,13 @@ class Gui:
         lname = selected_event_attendee.split(", ")[0]
         fname = selected_event_attendee.split(", ")[1]
         e = self.em.events[self.current_event]
+        ea = None
 
         # find the event_attendee object correlating with current event and current attendee (contact) selected
         for x in self.em.event_attendees:
             if x.event == e and x.contact.lastname == lname and x.contact.firstname == fname:
                 ea = x
+                break
 
         # ea = self.em.event_attendees[0]
         self.label_event_attendee = Label(self.frame, text=ea, font=(self.font, self.fontsize))
@@ -415,18 +452,18 @@ class Gui:
         self.button_memo = Button(self.frame, text="Save Memo", font=(self.font, self.fontsize), command=lambda: self.set_memo(ea))
         self.button_memo.pack()
 
-    # set the memo for an event_attendee object
+    # set the memo for an event_attendee object. Whenever you click "Save Memo"
     def set_memo(self, ea):
         ea.memo = self.memotext.get("1.0",'end-1c')
 
-    # This makes a dropdown selection list of all the contacts (to add to an event)
-    def list_contacts(self):
+    # This makes a dropdown selection list of all the contacts (to add to an event). When you click "Add Attendee"
+    def add_attendees_list(self):
         alist = []
         for x in self.em.contacts:
             alist.append(f"{x.lastname}, {x.firstname}")
         list_items = Variable(value=alist)
         self.listbox_contacts = Listbox(self.frame, width=30, height=len(alist), listvariable=list_items)
-        self.listbox_contacts.bind('<<ListboxSelect>>', self.items_selected)
+        self.listbox_contacts.bind('<<ListboxSelect>>', self.add_attendees_selected)
         self.listbox_contacts.pack()
         self.button_list_contacts["state"] = "disabled"
         self.button_list_attendees_going["state"] = "normal"
@@ -436,7 +473,7 @@ class Gui:
             self.is_current_attendees_dropdown = False
 
     # When selected a contact in event dropdown list
-    def items_selected(self, event):
+    def add_attendees_selected(self, event):
         self.button_list_contacts["state"] = "normal"
 
         # get all selected indices
