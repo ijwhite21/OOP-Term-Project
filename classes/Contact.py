@@ -19,6 +19,10 @@ class Contact(object):
         self.__building: str = data["Building"]
         if "POBOX" in data:
             self.__mailcode: str = data["POBOX"]
+        if "LastContact" in data:
+            self.__lastcontact = data["LastContact"]
+        else:
+            self.__lastcontact = ""
 
     # getters for each attribute
     @property
@@ -57,6 +61,14 @@ class Contact(object):
     def mailcode(self):
         return self.__mailcode
 
+    @property
+    def lastcontact(self):
+        return self.__lastcontact
+
+    @lastcontact.setter
+    def lastcontact(self, lc: str):
+        self.__lastcontact = lc
+
     # This function defines what happens when you print the object as text ie print(Contact)
     def __str__(self):
         """
@@ -66,11 +78,11 @@ class Contact(object):
         the variables passed into this function will replace each {} (in order)
         """
         return "{} {}\nTitle: {}\nEmail: {}\nDepartment: {}\nPhone: {}\n"\
-               "Building: {}\nUID: {}".format(self.firstname,
+               "Building: {}".format(self.firstname,
                                                    self.lastname,
                                                    self.title,
                                                    self.email,
                                                    self.department,
                                                    self.phone,
                                                    self.building,
-                                                   self.UID)
+                                                   )
