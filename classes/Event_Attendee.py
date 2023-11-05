@@ -1,5 +1,5 @@
-from classes.Contact import Contact
-from classes.Event import Event
+from tests import Contact
+from tests import Event
 
 """
 This class represents a tuple of 1 Event and 1 Contact object, meaning the Contact is attending the Event.

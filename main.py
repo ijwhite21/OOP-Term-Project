@@ -1,12 +1,9 @@
-from classes.Contact import Contact
-from classes.Event import Event
-from classes.Event_Attendee import Event_Attendee
-from classes.Event_Manager import EventManager
+from tests import EventManager
 from UI.GUI import Gui
 
 # This imports the contacts.json and events.json which hold all of the event and contact info.
 import json
-import calendar
+
 with open('contacts.json') as f:
     contact_data = json.load(f)
 with open('events.json') as g:
