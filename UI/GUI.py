@@ -1,9 +1,7 @@
 from tkinter import *
-from tkinter import ttk
-from tkinter import messagebox
-from tkinter.messagebox import showinfo
-from classes.Event_Manager import EventManager
-from classes.Contact import Contact
+from tests import EventManager
+from tests import Contact
+from tests import Event_Attendee
 
 """
 The Gui class handles all of the visuals via the tkinter library. 
@@ -69,7 +67,6 @@ class Gui:
 
         # this is the loop that refreshes the GUI screen
         self.root.mainloop()
-
 
 
     # This function is called whenever you try to close the window
@@ -306,7 +303,7 @@ class Gui:
         for x in self.em.contacts:
             alist.append(f"{x.lastname}, {x.firstname}")
         list_items = Variable(value=alist)
-        self.listbox = Listbox(self.frame, height=len(alist), font=(self.font, self.fontsize), listvariable=list_items)
+        self.listbox = Listbox(self.frame, width= 25, height=len(alist), font=(self.font, self.fontsize), listvariable=list_items)
         self.listbox.bind('<<ListboxSelect>>', self.select_contact)
         self.listbox.pack()
 
@@ -316,7 +313,7 @@ class Gui:
         selected_indices = self.listbox.curselection()
         # get selected items
         selected_events = ",".join([self.listbox.get(i) for i in selected_indices])
-        msg = f'You selected: {selected_events}'
+        # msg = f'You selected: {selected_events}'
         # self.label8 = Label(self.frame, text=selected_indices, font=(self.font, self.fontsize))
         # self.label8.pack()
         self.display_contact_single(int(selected_indices[0]))
@@ -325,7 +322,7 @@ class Gui:
     def display_contact_single(self, selected_indices):
         self.clear_frame()
         # add a back button
-        self.button_back = Button(self.frame, text="Back", font=(self.font, self.fontsize), command=self.display_contacts)
+        self.button_back = Button(self.frame, text="< Back", font=(self.font, 10), command=self.display_contacts)
         self.button_back.pack()
 
         c = self.em.contacts[selected_indices]
@@ -345,7 +342,7 @@ class Gui:
         self.lastcontact_button.pack()
 
     # set the lastcontact attribute for a Contact object. Whenever you click "Update Last Point of Contact"
-    def set_lastcontact(self, c):
+    def set_lastcontact(self, c: Contact):
         c.lastcontact = self.lastcontact_entry.get()
 
     # display all the events in a list when clicking the "Display Events" screen
@@ -367,7 +364,7 @@ class Gui:
         selected_indices = self.listbox_events.curselection()
         # get selected items
         selected_events = ",".join([self.listbox_events.get(i) for i in selected_indices])
-        msg = f'You selected: {selected_events}'
+        # msg = f'You selected: {selected_events}'
         # self.label8 = Label(self.frame, text=selected_indices, font=(self.font, self.fontsize))
         # self.label8.pack()
         self.display_event_single(int(selected_indices[0]))
@@ -375,7 +372,7 @@ class Gui:
     # This displays a single event using the event's print function. This is whenever you click on it in the selection list on "Display Events" screen
     def display_event_single(self,selected_indices):
         self.clear_frame()
-        self.button_back = Button(self.frame, text="Back", font=(self.font, self.fontsize),command=self.display_events)
+        self.button_back = Button(self.frame, text="< Back", font=(self.font, 10),command=self.display_events)
         self.button_back.pack()
         self.current_event = selected_indices
         e = self.em.events[selected_indices]
@@ -424,7 +421,7 @@ class Gui:
         # get selected items
         selected_event_attendee = ",".join([self.listbox_attendees_going.get(i) for i in selected_indices])
         self.clear_frame()
-        self.button_back = Button(self.frame, text="Back", font=(self.font, self.fontsize),command=self.display_events)
+        self.button_back = Button(self.frame, text="< Back", font=(self.font, 10),command=self.display_events)
         self.button_back.pack()
 
         # this will extract the first and lastnames from the selected index in the dropdownlist of attendees (contacts)
@@ -453,7 +450,7 @@ class Gui:
         self.button_memo.pack()
 
     # set the memo for an event_attendee object. Whenever you click "Save Memo"
-    def set_memo(self, ea):
+    def set_memo(self, ea: Event_Attendee):
         ea.memo = self.memotext.get("1.0",'end-1c')
 
     # This makes a dropdown selection list of all the contacts (to add to an event). When you click "Add Attendee"
