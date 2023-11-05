@@ -3,6 +3,7 @@ from classes.Contact import Contact
 from classes.Event import Event
 from classes.Event_Attendee import Event_Attendee
 from classes.Event_Manager import EventManager
+
 class TestContact(TestCase):
     def setUp(self):
         self.contact_data = {
