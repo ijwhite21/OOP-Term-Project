@@ -389,9 +389,25 @@ class Gui:
         # This button will show current attendees for a given event
         self.button_list_attendees_going = Button(self.frame, text="Current Attendees", font=(self.font, self.fontsize), command=self.list_attendees_going)
         self.button_list_attendees_going.pack()
+
+        #disable "Current Attendees" button if there are no attendees for the event, else enable it
+        if self.attendee_count_for_event(self.current_event) == 0:
+            self.button_list_attendees_going["state"] = "disabled"
+        else:
+            self.button_list_attendees_going["state"] = "normal"
+
         # add attendee button
         self.button_list_contacts = Button(self.frame, text="Add Attendee", font=(self.font, self.fontsize), command=self.add_attendees_list)
         self.button_list_contacts.pack()
+
+    #this function counts the number of attendees for a given event (index in em's event list)
+    def attendee_count_for_event(self, event: int) -> int:
+        count = 0
+        # iterate through event_attendees list and check if its event is equal to the event (index in event list) passed as an argument
+        for ea in self.em.event_attendees:
+            if ea.event == self.em.events[event]:
+                count += 1
+        return count
 
     # this lists the attendees (contacts) going to a particular event whenever you click the "Current Attendees" button
     def list_attendees_going(self):
@@ -456,14 +472,26 @@ class Gui:
     # This makes a dropdown selection list of all the contacts (to add to an event). When you click "Add Attendee"
     def add_attendees_list(self):
         alist = []
+        #list all the contacts in em's contacts list
         for x in self.em.contacts:
             alist.append(f"{x.lastname}, {x.firstname}")
+        # take the list of contacts and assign it to the listbox variable
         list_items = Variable(value=alist)
+        #define listbox
         self.listbox_contacts = Listbox(self.frame, width=30, height=len(alist), listvariable=list_items)
+        #define the listbox's function (when selecting an item)
         self.listbox_contacts.bind('<<ListboxSelect>>', self.add_attendees_selected)
         self.listbox_contacts.pack()
+        #disable "Add Attendee" button
         self.button_list_contacts["state"] = "disabled"
-        self.button_list_attendees_going["state"] = "normal"
+
+        # disable "Current Attendees" button if there are no attendees for the event, else enable it
+        if self.attendee_count_for_event(self.current_event) == 0:
+            self.button_list_attendees_going["state"] = "disabled"
+        else:
+            self.button_list_attendees_going["state"] = "normal"
+
+
         self.is_add_attendees_dropdown = True
         if self.is_current_attendees_dropdown:
             self.listbox_attendees_going.destroy()
@@ -476,10 +504,14 @@ class Gui:
         # get all selected indices
         selected_indices = self.listbox_contacts.curselection()
         selected_langs = ",".join([self.listbox_contacts.get(i) for i in selected_indices])
+
+        #add new event_attendee to em's list
         self.em.add_event_attendee(self.em.events[self.current_event], self.em.contacts[selected_indices[0]])
-        # # get selected items
-        # msg = f'You selected: {selected_langs}'
-        # # self.label8 = Label(self.frame, text=selected_indices, font=(self.font, self.fontsize))
-        # # self.label8.pack()
+
+        # disable "Current Attendees" button if there are no attendees for the event, else enable it
+        if self.attendee_count_for_event(self.current_event) == 0:
+            self.button_list_attendees_going["state"] = "disabled"
+        else:
+            self.button_list_attendees_going["state"] = "normal"
+
         self.listbox_contacts.destroy()
-        # print(self.em.event_attendees[len(self.em.event_attendees)-1])
