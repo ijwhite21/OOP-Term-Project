@@ -1,7 +1,7 @@
 from tkinter import *
-from tests import EventManager
-from tests import Contact
-from tests import Event_Attendee
+from classes.Event_Manager import EventManager
+from classes.Contact import Contact
+from classes.Event_Attendee import Event_Attendee
 
 """
 The Gui class handles all of the visuals via the tkinter library. 

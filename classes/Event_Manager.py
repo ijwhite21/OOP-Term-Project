@@ -1,6 +1,6 @@
-from tests import Event_Attendee
-from tests import Event
-from tests import Contact
+from classes.Event_Attendee import Event_Attendee
+from classes.Event import Event
+from classes.Contact import Contact
 
 # This class is meant to manage the Events, Contacts, and Event_Attendees
 # This class also directly communicates with the GUI as the GUI "has" an EventManager object (aggregation)

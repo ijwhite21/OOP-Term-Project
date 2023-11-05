@@ -1,4 +1,4 @@
-from tests import EventManager
+from classes.Event_Manager import EventManager
 from UI.GUI import Gui
 
 # This imports the contacts.json and events.json which hold all of the event and contact info.
