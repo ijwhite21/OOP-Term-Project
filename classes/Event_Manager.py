@@ -82,17 +82,31 @@ class EventManager(object):
     # This will append a new Event_Attendee object into the array 'event_attendees'
     # an event and a contact are passed in as arguments and then passed again into Event_Attendee's constructor
     def add_event_attendee(self, event: Event, contact: Contact):
-        # This bool will set to True if the event_attendee that's being added is already in the list
-        already: bool = False
-        # Check if the event attendee already exists
-        for x in self.event_attendees:
-            if x.event == event and x.contact == contact:
-                already = True
-                break
-        # if the event_attendee doesn't already exist, create it
-        if already == False:
+        #check if event_attendee already exists, if not, add the new event_attendee
+        if not self.is_attending(contact, event):
             # pass the same arguments into the Event_Attendee constructor
             self.__event_attendees.append(Event_Attendee(event, contact))
+
+    # This function takes in a UID and returns the Contact object with that UID
+    def uid_to_contact(self, uid: int) -> Contact | None:
+        for contact in self.contacts:
+            if contact.UID == uid:
+                return contact
+        return None
+
+    # This function takes in a UID and returns the Contact object with that UID
+    def uid_to_event(self, uid: int) -> Event | None:
+        for event in self.events:
+            if event.UID == uid:
+                return event
+        return None
+
+    # This function takes in a contact and an event and returns whether the contact is attending the event. True or False
+    def is_attending(self, c: Contact, e: Event) -> bool:
+        for ea in self.event_attendees:
+            if ea.contact == c and ea.event == e:
+                return True
+        return False
 
     # This sorts the contacts in the list by lastname
     def sort_contacts(self):
@@ -105,5 +119,5 @@ class EventManager(object):
 
     # This function defines what happens when you print the object as text ie print(Event_Manager)
     def __str__(self):
-        # This will print all of the event_attendee objects in self.event_attendees separated by a new line
+        # This will print all the event_attendee objects in self.event_attendees separated by a new line
         return "\n".join(map(str, self.event_attendees))

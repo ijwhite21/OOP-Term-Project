@@ -45,7 +45,8 @@ class Gui:
 
         # This variable is used to create an Event_Attendee object later on
         self.current_event: int = 0
-
+        self.current_event_uid: int = -1
+        self.uidlist = []
         # These are used to destroy the dropdown lists on the same page
         self.is_current_attendees_dropdown: bool = False
         self.is_add_attendees_dropdown: bool = False
@@ -313,9 +314,6 @@ class Gui:
         selected_indices = self.listbox.curselection()
         # get selected items
         selected_events = ",".join([self.listbox.get(i) for i in selected_indices])
-        # msg = f'You selected: {selected_events}'
-        # self.label8 = Label(self.frame, text=selected_indices, font=(self.font, self.fontsize))
-        # self.label8.pack()
         self.display_contact_single(int(selected_indices[0]))
 
     #This will display a single contact's info once clicked from the dropdown menu on "Display Contacts" screen
@@ -412,10 +410,13 @@ class Gui:
     # this lists the attendees (contacts) going to a particular event whenever you click the "Current Attendees" button
     def list_attendees_going(self):
         alist = []
+        self.uidlist = []
         # check who all is going to the event ie event_attendees in the list
         for x in self.em.event_attendees:
             if x.event == self.em.events[self.current_event]:
                 alist.append(f"{x.contact.lastname}, {x.contact.firstname}")
+                self.uidlist.append(x.contact.UID)
+
         list_items = Variable(value=alist)
 
         self.listbox_attendees_going = Listbox(self.frame, width=30, height=len(alist), listvariable=list_items)
@@ -443,12 +444,14 @@ class Gui:
         # this will extract the first and lastnames from the selected index in the dropdownlist of attendees (contacts)
         lname = selected_event_attendee.split(", ")[0]
         fname = selected_event_attendee.split(", ")[1]
-        e = self.em.events[self.current_event]
+        e: Event = self.em.events[self.current_event]
         ea = None
+
+        c: Contact = self.em.uid_to_contact(self.uidlist[selected_indices[0]])
 
         # find the event_attendee object correlating with current event and current attendee (contact) selected
         for x in self.em.event_attendees:
-            if x.event == e and x.contact.lastname == lname and x.contact.firstname == fname:
+            if x.event == e and x.contact.UID == c.UID:
                 ea = x
                 break
 
@@ -472,9 +475,12 @@ class Gui:
     # This makes a dropdown selection list of all the contacts (to add to an event). When you click "Add Attendee"
     def add_attendees_list(self):
         alist = []
+        self.uidlist = []
         #list all the contacts in em's contacts list
         for x in self.em.contacts:
-            alist.append(f"{x.lastname}, {x.firstname}")
+            if not self.em.is_attending(x, self.em.events[self.current_event]):
+                alist.append(f"{x.lastname}, {x.firstname}")
+                self.uidlist.append(x.UID)
         # take the list of contacts and assign it to the listbox variable
         list_items = Variable(value=alist)
         #define listbox
@@ -505,8 +511,10 @@ class Gui:
         selected_indices = self.listbox_contacts.curselection()
         selected_langs = ",".join([self.listbox_contacts.get(i) for i in selected_indices])
 
+        # here we pass the selected index into the uidlist and into the em's uid_to_contact function. This returns a contact object
+        c: Contact = self.em.uid_to_contact(self.uidlist[selected_indices[0]])
         #add new event_attendee to em's list
-        self.em.add_event_attendee(self.em.events[self.current_event], self.em.contacts[selected_indices[0]])
+        self.em.add_event_attendee(self.em.events[self.current_event], c)
 
         # disable "Current Attendees" button if there are no attendees for the event, else enable it
         if self.attendee_count_for_event(self.current_event) == 0:
