@@ -438,7 +438,9 @@ class Gui:
         # get selected items
         selected_event_attendee = ",".join([self.listbox_attendees_going.get(i) for i in selected_indices])
         self.clear_frame()
-        self.button_back = Button(self.frame, text="< Back", font=(self.font, 10),command=self.display_events)
+        # self.button_back = Button(self.frame, text="< Back", font=(self.font, 10),command=self.display_events)
+        #back button goes back to the display_event_single screen
+        self.button_back = Button(self.frame, text="< Back", font=(self.font, 10),command=lambda: self.display_event_single(self.current_event))
         self.button_back.pack()
 
         # this will extract the first and lastnames from the selected index in the dropdownlist of attendees (contacts)
