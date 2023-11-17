@@ -117,7 +117,7 @@ class EventManager(object):
     def sort_events(self):
         self.events.sort(key=lambda x: x.date, reverse=False)
 
-    # This function defines what happens when you print the object as text ie print(Event_Manager)
-    def __str__(self):
-        # This will print all the event_attendee objects in self.event_attendees separated by a new line
-        return "\n".join(map(str, self.event_attendees))
+    # # This function defines what happens when you print the object as text ie print(Event_Manager)
+    # def __str__(self):
+    #     # This will print all the event_attendee objects in self.event_attendees separated by a new line
+    #     return "\n".join(map(str, self.event_attendees))

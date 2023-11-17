@@ -11,6 +11,17 @@
     "POBox": "5101"
   },
   {
+    "FirstName": "Duke",
+    "LastName": "Blowout",
+    "UID": 27,
+    "EmailAddress": "blowout@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Adjunct Faculty",
+    "Phone": "931-867-5309",
+    "Building": "Bruner Hall (BRUN) 501",
+    "POBox": "1234"
+  },
+  {
     "FirstName": "Mark",
     "LastName": "Boshart",
     "UID": 1,
@@ -231,6 +242,17 @@
     "POBox": "5101"
   },
   {
+    "FirstName": "Woof Woof",
+    "LastName": "Plumber",
+    "UID": 28,
+    "EmailAddress": "wwplumber@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Adjunct Faculty",
+    "Phone": "931-123-4567",
+    "Building": "Bruner Hall (BRUN) 502",
+    "POBox": "2345"
+  },
+  {
     "FirstName": "Mir",
     "LastName": "Pritom",
     "UID": 21,
@@ -284,6 +306,17 @@
     "Phone": "931-372-6178",
     "Building": "Bruner Hall (BRUN) 234",
     "POBox": "5101"
+  },
+  {
+    "FirstName": "Java",
+    "LastName": "The Hutt",
+    "UID": 29,
+    "EmailAddress": "jthutt@tntech.edu",
+    "Dept": "Computer Science",
+    "Title": "Data Wrangler",
+    "Phone": "931-372-3428",
+    "Building": "Bruner Hall (BRUN) THX 1138",
+    "POBox": "1111"
   },
   {
     "FirstName": "Paul",
