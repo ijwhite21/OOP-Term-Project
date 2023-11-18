@@ -37,6 +37,7 @@ class TestContact(TestCase):
 
         self.assertEqual(self.event.name, "Career Fair")
 
+    #TODO hollow these out
     def test_event_attendee(self):
         self.attendee = Contact(self.contact_data)
         self.event_attended = Event(self.event_data)
@@ -45,6 +46,7 @@ class TestContact(TestCase):
         self.assertEqual(self.event_attendee.event.name, "Career Fair")
         self.assertEqual(self.event_attendee.contact.firstname, "Rajesh")
 
+    #TODO hollow these out
     def test_event_manager(self):
         self.event_manager = EventManager()
         self.event_manager.add_contact(self.contact_data)

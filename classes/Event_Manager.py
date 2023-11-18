@@ -62,20 +62,24 @@ class EventManager(object):
     # This is called by the GUI and a dictionary is passed
     # other than loading in the json data on startup, the dictionary passed as an argument is made in the GUI class in the form_submission_event() function
     def add_event(self, e: dict):
-        # this makes sure the new UID for the event is not equal to any other (increments by 1)
-        self.eventUID = max(self.eventUID, e["UID"]) + 1
         # pass the same argument into the Event constructor to add an Event object to the events list
         self.events.append(Event(e))
+
+        # this makes sure the new UID for the event is not equal to any other (increments by 1)
+        self.eventUID = max(self.eventUID, e["UID"]) + 1
+
         # sort events by date
         self.sort_events()
 
     # This function appends a new contact object onto the array 'contacts'
     # other than loading in the json data on startup, the dictionary passed as an argument is made in the GUI class in the form_submission_contact() function
     def add_contact(self, c: dict):
-        # this makes sure the new UID for the contact is not equal to any other (increments by 1)
-        self.contactUID = max(self.contactUID, c["UID"]) + 1
         # append a contact onto the contacts list passing the dictionary "c" as an argument
         self.__contacts.append(Contact(c))
+
+        # this makes sure the new UID for the contact is not equal to any other (increments by 1)
+        self.contactUID = max(self.contactUID, c["UID"]) + 1
+
         # sort contacts by lastname
         self.sort_contacts()
 
@@ -87,6 +91,7 @@ class EventManager(object):
             # pass the same arguments into the Event_Attendee constructor
             self.__event_attendees.append(Event_Attendee(event, contact))
 
+    # TODO maybe hollow out the body of this function and replace it with pass
     # This function takes in a UID and returns the Contact object with that UID
     def uid_to_contact(self, uid: int) -> Contact | None:
         for contact in self.contacts:
@@ -94,6 +99,7 @@ class EventManager(object):
                 return contact
         return None
 
+    # TODO maybe hollow out the body of this function and replace it with pass
     # This function takes in a UID and returns the Contact object with that UID
     def uid_to_event(self, uid: int) -> Event | None:
         for event in self.events:
@@ -101,6 +107,7 @@ class EventManager(object):
                 return event
         return None
 
+    #TODO maybe hollow out the body of this function and replace it with pass
     # This function takes in a contact and an event and returns whether the contact is attending the event. True or False
     def is_attending(self, c: Contact, e: Event) -> bool:
         for ea in self.event_attendees:

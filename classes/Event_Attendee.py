@@ -10,6 +10,7 @@ For now, the "memo" attribute is a catch-all for these, but in the future, more 
 """
 
 class Event_Attendee(object):
+    #TODO maybe hollow out this entire class. Remember, attributes must have the same names as these when students make this
     # an Event object and Contact object are passed into the constructor, essentially creating a tuple object
     def __init__(self, e: Event, c: Contact):
         self.__event: Event = e
@@ -36,6 +37,7 @@ class Event_Attendee(object):
         self.__memo = m
 
     # This function defines what happens when you print the object as text ie print(Event_Attendee)
+    #PRINTS IN THE FORM "Jacob Strickler attending Data Science League Meeting"
     def __str__(self):
         """
         python has a few ways of streamlining concatenation of strings.
